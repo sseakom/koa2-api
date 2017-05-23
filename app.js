@@ -8,8 +8,8 @@ const logger = require('koa-logger')
 const cors = require('koa-cors')
 
 const index = require('./routes/index')
-
 const post = require('./routes/post')
+const sign = require('./routes/sign')
 
 // error handler
 onerror(app)
@@ -36,7 +36,7 @@ app.use(async(ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-
 app.use(post.routes(), post.allowedMethods())
+app.use(sign.routes(), sign.allowedMethods())
 
 module.exports = app
