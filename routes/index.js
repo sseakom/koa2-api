@@ -8,13 +8,16 @@ router.get('/', async(ctx, next) => {
 })
 
 router.get('/add', async(ctx, next) => {
-    const name = ctx.request.query.name + ''
-    ctx.body = await new todoModel({ name: name, date: Date.parse(new Date()).toString() }).save()
+    ctx.body = await new todoModel({
+        name: ctx.request.query.name,
+        date: Date.parse(new Date()).toString()
+    }).save()
 })
 
 router.get('/del', async(ctx, next) => {
-    const id = ctx.request.query.id
-    ctx.body = await todoModel.find({ _id: id }).remove()
+    ctx.body = await todoModel.find({
+        _id: ctx.request.query.id
+    }).remove()
 })
 
 module.exports = router
