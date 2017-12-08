@@ -10,13 +10,14 @@ router.post('/signUp', async(ctx, next) => {
     if (res) {
         ctx.body = "用户名重复"
     } else {
-        await new userModel({
+        let userEntity = new userModel({
             username: ctx.request.body.username,
             password: ctx.request.body.password,
             date: Date.parse(new Date()).toString()
-        }).save()
-        ctx.body = "注册成功"
+        })
+        await userEntity.save()
     }
+    ctx.body = "注册成功"
 })
 
 router.post('/signIn', async(ctx, next) => {
